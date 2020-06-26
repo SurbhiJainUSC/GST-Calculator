@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 months = ['January', 'February' , 'March', 'April' , 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+UPLOAD_DIRECTORY = "/Users/surbhijain/Desktop/HerokuGSTCalculator/Accounts/SurbhiFirm/Data/"
 
 def writeToCSV(filename, updatedDate, invoiceNumber, vendorName, item,
                GSTNumber, salePurchase, basicAmount, IGSTRate, IGSTAmount,
@@ -514,6 +515,15 @@ def add_payment():
         return render_template('add_payment.html')
         
 
+@app.route("/files")
+def list_files():
+    """Endpoint to list files on the server."""
+    files = []
+    for filename in os.listdir(UPLOAD_DIRECTORY):
+        path = os.path.join(UPLOAD_DIRECTORY, filename)
+        if os.path.isfile(path):
+            files.append(filename)
+    return jsonify(files)
 
 if __name__ == '__main__':
     # Threaded option to enable multiple instances for multiple user access support
