@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<style>
+  h1 {text-align: center;}
+  div {text-align: center;}
+input[type=text], select {
+  width: 70%;
+  padding: 12px 10px;
+  margin: 6px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=date], select {
+  width: 70%;
+  padding: 12px 10px;
+  margin: 6px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+input[type=submit] {
+  width: 80%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 10px;
+  margin: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+label {
+	margin: 6px 10px;
+}
+
+input[type=checkbox] {
+	margin: 6px 10px;
+}
+
+
+
+</style>
+
+<script>
+	function validateForm() {
+		var basicAmount = document.forms["accountForm"]["basicAmount"].value;
+		if(isNaN(basicAmount)) {
+	        alert("Enter correct basic amount.");
+	        return false;
+	    }
+
+	    var igstRate = document.forms["accountForm"]["igstRate"].value;
+		if(isNaN(igstRate) || igstRate>100) {
+	        alert("Enter correct IGST Rate.");
+	        return false;
+	    } 
+
+	    var cgstRate = document.forms["accountForm"]["cgstRate"].value;
+		if(isNaN(cgstRate) || cgstRate>100) {
+	        alert("Enter correct CGST Rate.");
+	        return false;
+	    } 
+
+	    var sgstRate = document.forms["accountForm"]["sgstRate"].value;
+		if(isNaN(sgstRate) || sgstRate>100) {
+	        alert("Enter correct SGST Rate.");
+	        return false;
+	    } 
+
+	    var sale = document.forms["accountForm"]["sale"].checked;
+	    var purchase = document.forms["accountForm"]["purchase"].checked;
+		if(sale && purchase) {
+	        alert("Both Sale and Purchase cannot be checked.");
+	        return false;
+	    } 
+	    if(sale==false && purchase==false) {
+	        alert("Select either Sale or Purchase.");
+	        return false;
+	    } 
+	    
+    }
+</script>
+
+<div>
+<h1>Add Account</h1>
+<a href="/">Go back to Home Page</a>
+</div>
+
+<div>
+  <form action="/add_account" name="accountForm" method="post" autocomplete="on" onsubmit="return validateForm()">
+  <label for="firmName">Firm Name *</label>
+  <input type="text" id="firmName" name="firmName" required><br>
+
+  <label for="siteName">Site Name</label>
+  <input type="text" id="siteName" name="siteName"><br>
+
+  <label for="date">Date *</label>
+  <input type="date" id="date" name="date" required=""><br>
+
+  <label for="invoice">Invoice Number *</label>
+  <input type="text" id="invoice" name="invoice" required><br>
+
+  <label for="vendor">Vendor Name *</label>
+  <input type="text" id="vendor" name="vendor" required><br>
+
+  <label for="gstNumber">GST Number *</label>
+  <input type="text" id="gstNumber" name="gstNumber" required><br>
+
+  <label for="item">Item</label>
+  <input type="text" id="item" name="item"><br><br>
+
+  <input type="checkbox" id="sale" name="sale" value="Sale">
+  <label for="sale">Sale</label>
+  <input type="checkbox" id="purchase" name="purchase" value="Purchase">
+  <label for="purchase">Purchase</label><br><br>
+
+  <label for="basicAmount">Basic Amount</label>
+  <input type="text" id="basicAmount" name="basicAmount"><br>
+
+  <label for="igstRate">IGST Rate (%)</label>
+  <input type="text" id="igstRate" name="igstRate"><br>
+
+  <label for="cgstRate">CGST Rate (%)</label>
+  <input type="text" id="cgstRate" name="cgstRate"><br>
+
+  <label for="sgstRate">SGST Rate (%)</label>
+  <input type="text" id="sgstRate" name="sgstRate"><br>
+
+  <input type="submit" value="Add">
+</form>
+  
+</div>
+
+
+</body>
+</html>

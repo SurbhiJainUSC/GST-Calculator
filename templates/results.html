@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+<body>
+<style>
+	h1 {text-align: center;}
+	div {text-align: center;}
+	input[type=text], select {
+  width: 70%;
+  padding: 12px 10px;
+  margin: 6px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+input[type=date], select {
+  width: 70%;
+  padding: 12px 10px;
+  margin: 6px 10px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+input[type=submit] {
+  width: 80%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 10px;
+  margin: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+input[type=button] {
+  width: 100%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 10px;
+  margin: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+input[type=button]:hover {
+  background-color: #45a049;
+}
+
+label {
+	margin: 6px 10px;
+}
+
+input[type=checkbox] {
+	margin: 6px 10px;
+}
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+</style>
+
+<script>
+	function Openform() {
+    	document.getElementById('updateAccountForm').style.display = 'block';
+    	document.getElementById('resultTable').style.display = 'none';
+    	document.getElementById('updateButton').style.display = 'none';
+	}
+	
+</script>
+
+<div id = "resultTable">
+  <h1>Update Successful!!</h1>
+  <a href="/">Go back to Home Page</a><br><br>
+  <table border = 10>
+    {% for key, value in result.items() %}
+
+    <tr>
+       <th> {{ key }} </th>
+       <td> {{ value }} </td>
+    </tr>
+
+    {% endfor %}
+ </table>
+
+ <input id="updateButton" name="updateData" type="button" value="Update Data" onclick = "Openform();">
+</div>
+
+<div id = "updateAccountForm" style = "display:none">
+	<h1>Update Account</h1>
+	<a href="/">Go back to Home Page</a>
+
+	<form action="/update_account" name="updateAccount" method="post" autocomplete="on" onsubmit="return validateForm()">
+	  <label for="firmName">Firm Name</label>
+	  <input type="text" id="firmName" name="firmName" value="{{result['Firm Name']}}" readonly><br>
+
+	  <label for="date">Date</label>
+	  <input type="text" id="date" name="date" value="{{result['Date']}}" readonly><br>
+
+	  <label for="invoice">Invoice Number</label>
+	  <input type="text" id="invoice" name="invoice" value="{{result['Invoice Number']}}" readonly><br>
+
+	  <label for="vendor">Vendor Name</label>
+	  <input type="text" id="vendor" name="vendor" value="{{result['Vendor Name']}}" readonly><br>
+
+	  <label for="gstNumber">GST Number</label>
+	  <input type="text" id="gstNumber" name="gstNumber" value="{{result['GST Number']}}" readonly><br>
+
+	  <label for="item">Item</label>
+	  <input type="text" id="item" name="item" value="{{result['Item']}}" readonly><br><br>
+
+	  <label for="item">Sale/Purchase</label>
+	  <input type="text" id="salePurchase" name="salePurchase" value="{{result['Sale/Purchase']}}" readonly><br><br>
+
+	  <label for="basicAmount">Basic Amount</label>
+	  <input type="text" id="basicAmount" name="basicAmount" value="{{result['Basic Amount']}}" readonly><br>
+
+	  <label for="igstRate">IGST Rate</label>
+	  <input type="text" id="igstRate" name="igstRate" value="{{result['IGST Rate']}}" readonly><br>
+
+	  <label for="igstAmount">IGST Amount</label>
+	  <input type="text" id="igstAmount" name="igstAmount" value="{{result['IGST Amount']}}"><br>
+
+	  <label for="cgstRate">CGST Rate</label>
+	  <input type="text" id="cgstRate" name="cgstRate" value="{{result['CGST Rate']}}" readonly><br>
+
+	  <label for="cgstAmount">CGST Amount</label>
+	  <input type="text" id="cgstAmount" name="cgstAmount" value="{{result['CGST Amount']}}"><br>
+
+	  <label for="sgstRate">SGST Rate</label>
+	  <input type="text" id="sgstRate" name="sgstRate" value="{{result['SGST Rate']}}" readonly><br>
+
+	  <label for="sgstAmount">SGST Amount</label>
+	  <input type="text" id="sgstAmount" name="sgstAmount" value="{{result['SGST Amount']}}"><br>
+
+	  <input type="submit" value="Update">
+	</form>
+</div>
+</body>
+</html>
