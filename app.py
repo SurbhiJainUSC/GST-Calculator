@@ -1,6 +1,6 @@
 import os
 import csv
-
+import webbrowser
 # app.py
 from flask import Flask, request, jsonify, render_template
 app = Flask(__name__)
@@ -558,5 +558,5 @@ def add_payment():
         
 
 if __name__ == '__main__':
-    # Threaded option to enable multiple instances for multiple user access support
-    app.run(threaded=True, port=5000)
+	webbrowser.open_new('http://127.0.0.1:5000/')
+	app.run(threaded=True, port=5000)
